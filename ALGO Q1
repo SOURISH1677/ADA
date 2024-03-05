@@ -1,0 +1,37 @@
+Create a class named 'Student' with a string variable 'name', an integer variable 'roll no' and a string variable 'class'. All datatypes are private.
+
+a) Assign the value of roll no. as '123452'and that of name as 'Rohit' of classs 'btech' by creating an object of the class student.
+
+b) Update the value of roll no as your roll number and name as your name.
+
+
+
+/* Online C++ Compiler and Editor */
+#include <iostream>
+
+using namespace std;
+
+class Student
+   {
+    private:
+    string name;
+    int rollno;
+    string classs;
+    
+    public:
+    void change(string name,int rollno,string classs)
+    {
+      name="Sourish";
+      rollno=22104066;
+      classs="electrical"
+      
+       cout << "name: " << name << endl;
+            cout << "rollno: " << rollno;
+   };
+  int main()
+   {
+      Student Obj;
+      Obj.name="Rohit";
+      Obj.rollno=12352;
+      Obj.classs="btech";
+   }
