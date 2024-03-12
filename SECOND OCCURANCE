@@ -1,0 +1,39 @@
+SECOND OCCURANCE
+
+#include <iostream>
+
+int SecondOccurrence(int a[], int n, int key) {
+    int index = -1;
+    int count = 0;
+
+    // Traverse the array from right to left
+    for (int i = n - 1; i >= 0; i--) {
+        // If the current element is equal to the key
+        if (a[i] == key) {
+            // Increment the count of occurrences
+            count++;
+            // If this is the second occurrence of the key
+            if (count == 2) {
+                index = i;
+                break;
+            }
+        }
+    }
+
+    return index;
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1};
+    int key = 5;
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int result = SecondOccurrence(arr, n, key);
+    
+    if (result != -1)
+        std::cout << "Second occurrence of " << key << " is at index " << result << std::endl;
+    else
+        std::cout << "Second occurrence of " << key << " does not exist." << std::endl;
+
+    return 0;
+}
