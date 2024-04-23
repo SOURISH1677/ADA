@@ -1,0 +1,92 @@
+NQUEEN
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to print the solution
+void printSolution(const vector<int>& queenPos) {
+    int N = queenPos.size();
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (queenPos[i] == j) {
+                cout << "Q ";
+            } else {
+                cout << ". ";
+            }
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+// Function to check if a queen can be placed at position (row, col)
+bool isSafe(const vector<int>& queenPos, int row, int col) {
+    int N = queenPos.size();
+
+    // Check if there is a queen in the same column
+    for (int i = 0; i < row; i++) {
+        if (queenPos[i] == col) {
+            return false;
+        }
+    }
+
+    // Check upper diagonal on left side
+    for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+        if (queenPos[i] == j) {
+            return false;
+        }
+    }
+
+    // Check upper diagonal on right side
+    for (int i = row, j = col; i >= 0 && j < N; i--, j++) {
+        if (queenPos[i] == j) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// Recursive function to solve N-Queens problem
+void solveNQueensUtil(vector<int>& queenPos, int row, int& solutionCount) {
+    int N = queenPos.size();
+
+    if (row == N) {
+        // If all queens are placed successfully, print the solution
+        printSolution(queenPos);
+        solutionCount++;
+        return;
+    }
+
+    // Try placing the queen in each column of the current row
+    for (int col = 0; col < N; col++) {
+        if (isSafe(queenPos, row, col)) {
+            // Place queen in this position and recurse for next row
+            queenPos[row] = col;
+            solveNQueensUtil(queenPos, row + 1, solutionCount);
+
+            // Backtrack and remove the queen from this position
+            queenPos[row] = -1;
+        }
+    }
+}
+
+// Function to solve N-Queens problem
+int solveNQueens(int N) {
+    vector<int> queenPos(N, -1); // Vector to store the column position of queens
+    int solutionCount = 0;
+    solveNQueensUtil(queenPos, 0, solutionCount); // Start from the first row
+    return solutionCount;
+}
+
+int main() {
+    int N;
+    cout << "Enter the number of queens (N): ";
+    cin >> N;
+
+    int solutions = solveNQueens(N);
+    cout << "Total number of solutions for " << N << "-Queens problem: " << solutions << endl;
+
+    return 0;
+}
